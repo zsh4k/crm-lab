@@ -1,0 +1,54 @@
+services:
+  crm-postgres:
+    image: postgres:16
+    container_name: crm-postgres
+    hostname: crm-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-crm}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-crm_dev}
+      POSTGRES_DB: ${POSTGRES_DB:-crm}
+    ports:
+      - "0.0.0.0:5440:5432"
+    volumes:
+      - crm_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-crm} -d ${POSTGRES_DB:-crm}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    networks:
+      - crm
+
+  crm-api:
+    build: .
+    container_name: crm-api
+    hostname: crm-api
+    restart: unless-stopped
+    depends_on:
+      crm-postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://crm:crm_dev@crm-postgres:5432/crm}
+      PORT: 3210
+      APP_BASE_URL: ${APP_BASE_URL:-http://localhost:3210}
+      CRM_ENC_KEY: ${CRM_ENC_KEY:-dev-only-insecure-key-change-me}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      GOOGLE_REDIRECT_URI: ${GOOGLE_REDIRECT_URI:-http://localhost:3210/api/google/callback}
+      SYNC_POLL_INTERVAL_MS: ${SYNC_POLL_INTERVAL_MS:-120000}
+      VAPID_PUBLIC_KEY: ${VAPID_PUBLIC_KEY:-}
+      VAPID_PRIVATE_KEY: ${VAPID_PRIVATE_KEY:-}
+      VAPID_SUBJECT: ${VAPID_SUBJECT:-mailto:hello@bunx.monster}
+      REMINDER_LEAD_MIN: ${REMINDER_LEAD_MIN:-10}
+    ports:
+      - "0.0.0.0:3210:3210"
+    networks:
+      - crm
+
+volumes:
+  crm_pg:
+
+networks:
+  crm:
+    name: crm
