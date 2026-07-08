@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from "preact/hooks";
-import { api, CrmEvent, Contact, Opportunity, money, fmtTime, sameDay, startOfDay, pushState, enablePush, pushTest, PushState } from "../lib";
+import { api, CrmEvent, Contact, Opportunity, money, fmtTime, sameDay, startOfDay, pushState, enablePush, pushTest, PushState, MONTHS } from "../lib";
 import { Logo } from "../logo";
 import { IconCampana } from "../icons";
 import { useToast, Toast } from "../components";
+import { LineChart } from "../charts";
 
 const STATUS = [
   { id: "open", label: "Abiertas", color: "#22d3ee" },
@@ -72,6 +73,17 @@ export function Inicio({ onOpenCita }: { onOpenCita: (e: CrmEvent) => void }) {
 
   const fmtDate = now.toLocaleDateString("es-MX", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
 
+  // Tendencia: ingresos por mes (serie de ejemplo para el preview del lab).
+  const revSeries = useMemo(() => {
+    const sample = [82000, 96000, 88000, 121000, 104000, 143000];
+    const n = sample.length;
+    return sample.map((value, i) => {
+      const d = new Date(now.getFullYear(), now.getMonth() - (n - 1) + i, 1);
+      return { label: MONTHS[d.getMonth()].slice(0, 3), value };
+    });
+  }, [now.getMonth()]);
+  const kfmt = (v: number) => `$${Math.round(v / 1000)}k`;
+
   return (
     <div class="view">
       {/* Reloj con la marca a la izquierda */}
@@ -139,6 +151,13 @@ export function Inicio({ onOpenCita }: { onOpenCita: (e: CrmEvent) => void }) {
         ) : (
           <p class="muted" style={{ textAlign: "center", padding: "20px" }}>Sin datos de pipeline todavía.</p>
         )}
+      </div>
+
+      {/* Tendencia (gráfica de línea) */}
+      <h2 class="sec-title">Tendencia</h2>
+      <div class="chart-card">
+        <div class="trend-head">Ingresos por mes <span class="dim">· últimos 6 meses</span></div>
+        <LineChart data={revSeries} format={kfmt} id="rev" />
       </div>
 
       <Toast msg={msg} />
