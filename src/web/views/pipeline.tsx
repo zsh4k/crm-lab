@@ -1,7 +1,9 @@
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useMemo, useState } from "preact/hooks";
 import { api, Opportunity, Contact, money, MONTHS, matchesQuery } from "../lib";
 import { Modal, Toast, useToast, Empty, SearchBar } from "../components";
 import { IconPipeline } from "../icons";
+import { LineChart } from "../charts";
+import { LineChartJs } from "../charts-chartjs";
 
 const STATUSES = [
   { id: "open", label: "Abiertas", color: "#22d3ee" },
@@ -19,6 +21,18 @@ export function Pipeline() {
   const [mCursor, setMCursor] = useState(() => new Date());
   const [scope, setScope] = useState<"month" | "all">("month");
   const { msg, flash } = useToast();
+
+  // Serie de ejemplo para la sección Tendencia (ingresos por mes, 6 meses).
+  const revSeries = useMemo(() => {
+    const sample = [82000, 96000, 88000, 121000, 104000, 143000];
+    const n = sample.length;
+    const base = new Date();
+    return sample.map((value, i) => {
+      const d = new Date(base.getFullYear(), base.getMonth() - (n - 1) + i, 1);
+      return { label: MONTHS[d.getMonth()].slice(0, 3), value };
+    });
+  }, []);
+  const kfmt = (v: number) => `$${Math.round(v / 1000)}k`;
 
   const load = async () => setOpps(await api.opportunities.list());
   useEffect(() => { load(); api.contacts.list().then(setContacts); }, []);
@@ -59,6 +73,15 @@ export function Pipeline() {
         <div class="brand"><IconPipeline /> Pipeline</div>
         <button class="primary sm" onClick={() => setDraft({ title: "", status: "open", amount: "0", currency: "MXN" })}>+ Nueva</button>
       </header>
+
+      {/* Tendencia — comparación de estilos: SVG a mano vs Chart.js */}
+      <h2 class="sec-title">Tendencia · Ingresos por mes</h2>
+      <div class="chart-card">
+        <div class="cmp-tag">SVG a mano <span class="dim">· +3 KB · líneas rectas</span></div>
+        <LineChart data={revSeries} format={kfmt} id="pipe-rev" />
+        <div class="cmp-tag" style={{ marginTop: "16px" }}>Chart.js <span class="dim">· +~65 KB · curva suave</span></div>
+        <LineChartJs data={revSeries} format={kfmt} />
+      </div>
 
       {opps.length === 0 ? (
         <Empty Icon={IconPipeline} text="Sin oportunidades. Creá la primera con “+ Nueva”." />

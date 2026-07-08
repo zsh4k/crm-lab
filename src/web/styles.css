@@ -489,3 +489,6 @@ button, input, textarea { font: inherit; color: inherit; }
 .orderline .price { width: 78px; }
 .orderline input { background: var(--bg-2); border: 1px solid var(--line); color: var(--txt); border-radius: 8px; padding: 8px; font-size: 0.82rem; }
 .ordtotal { text-align: right; margin: 6px 0 10px; font-size: 0.95rem; }
+
+/* ── Comparación de gráficas (Tendencia en Pipeline) ── */
+.cmp-tag { font-size: 0.8rem; font-weight: 700; color: var(--txt); margin-bottom: 4px; }
