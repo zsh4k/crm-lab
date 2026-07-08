@@ -489,16 +489,3 @@ button, input, textarea { font: inherit; color: inherit; }
 .orderline .price { width: 78px; }
 .orderline input { background: var(--bg-2); border: 1px solid var(--line); color: var(--txt); border-radius: 8px; padding: 8px; font-size: 0.82rem; }
 .ordtotal { text-align: right; margin: 6px 0 10px; font-size: 0.95rem; }
-
-/* ── Gráfica de línea (Tendencia) ───────────────────── */
-.trend-head { font-size: 0.9rem; color: var(--txt); margin-bottom: 6px; }
-.linechart { width: 100%; }
-.lc-tip {
-  pointer-events: none; z-index: 2;
-  display: flex; flex-direction: column; gap: 1px;
-  background: var(--panel); border: 1px solid var(--line);
-  border-radius: 8px; padding: 5px 9px; box-shadow: 0 4px 14px rgba(0,0,0,.28);
-  white-space: nowrap;
-}
-.lc-tip-label { font-size: 0.66rem; color: var(--dim); text-transform: uppercase; letter-spacing: .5px; }
-.lc-tip-value { font-size: 0.9rem; font-weight: 700; color: var(--txt); font-variant-numeric: tabular-nums; }
