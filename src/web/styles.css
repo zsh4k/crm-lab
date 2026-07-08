@@ -85,7 +85,7 @@ button, input, textarea { font: inherit; color: inherit; }
 }
 .ghost:hover { border-color: var(--accent); }
 .today {
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  background: var(--accent);
   color: #04121b; border: none; border-radius: 10px; padding: 0 14px; height: 40px;
   font-weight: 700; cursor: pointer;
 }
@@ -127,7 +127,7 @@ button, input, textarea { font: inherit; color: inherit; }
 /* ── Selector de vista + vistas semana/día ──────────── */
 .viewtabs { display: flex; gap: 4px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 4px; margin: 0 0 12px; }
 .vtab { flex: 1; background: none; border: none; color: var(--dim); border-radius: 7px; padding: 8px; cursor: pointer; font-size: 0.85rem; }
-.vtab.active { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #04121b; font-weight: 700; }
+.vtab.active { background: var(--accent); color: #04121b; font-weight: 700; }
 .ev-row { display: flex; align-items: baseline; gap: 10px; width: 100%; text-align: left; background: var(--panel); border: 1px solid var(--line); box-shadow: inset 3px 0 0 var(--accent); border-radius: 8px; padding: 10px 12px; cursor: pointer; color: var(--txt); }
 .ev-row:hover { border-color: var(--accent); }
 .ev-time { color: var(--accent); font-variant-numeric: tabular-nums; font-size: 0.8rem; flex-shrink: 0; min-width: 64px; }
@@ -196,7 +196,7 @@ button, input, textarea { font: inherit; color: inherit; }
 }
 .modal-actions .spacer { flex: 1; }
 .primary {
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  background: var(--accent);
   color: #04121b; border: none; border-radius: 10px; padding: 10px 18px; font-weight: 700; cursor: pointer;
 }
 .danger { background: rgba(244,63,94,0.12); color: var(--danger); border: 1px solid rgba(244,63,94,0.4); border-radius: 10px; padding: 10px 14px; cursor: pointer; }
@@ -347,7 +347,7 @@ button, input, textarea { font: inherit; color: inherit; }
 .picker-months { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .pm { background: var(--panel); border: 1px solid var(--line); color: var(--txt); border-radius: 10px; padding: 12px 0; cursor: pointer; font-size: 0.9rem; transition: border-color 0.15s; }
 .pm:hover { border-color: var(--accent); }
-.pm.sel { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #04121b; font-weight: 700; border-color: transparent; }
+.pm.sel { background: var(--accent); color: #04121b; font-weight: 700; border-color: transparent; }
 
 /* ── Inicio (home) ──────────────────────────────────── */
 .navlabel { font-size: 0.62rem; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -406,7 +406,7 @@ button, input, textarea { font: inherit; color: inherit; }
 /* ── Selector + tipos de gráfica del Pipeline ───────── */
 .chart-switch { display: flex; gap: 4px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 4px; margin-bottom: 10px; }
 .cs-btn { flex: 1; background: none; border: none; color: var(--dim); border-radius: 7px; padding: 7px; cursor: pointer; font-size: 0.82rem; }
-.cs-btn.active { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #04121b; font-weight: 700; }
+.cs-btn.active { background: var(--accent); color: #04121b; font-weight: 700; }
 .barchart { width: 100%; display: flex; flex-direction: column; gap: 12px; }
 .bar-row { display: flex; align-items: center; gap: 10px; font-size: 0.82rem; }
 .bar-label { min-width: 84px; }

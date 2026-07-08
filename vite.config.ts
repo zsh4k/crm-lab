@@ -5,8 +5,8 @@ import { resolve } from "node:path";
 // El frontend vive en src/web y se construye a ./dist, que el server Hono sirve.
 export default defineConfig({
   root: "src/web",
-  // Servido bajo https://<user>.github.io/crm-demo/ en GitHub Pages.
-  base: "/crm-demo/",
+  // Servido bajo https://<user>.github.io/crm-lab/ en GitHub Pages.
+  base: "/crm-lab/",
   plugins: [preact()],
   build: {
     outDir: resolve(__dirname, "dist"),

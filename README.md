@@ -1,9 +1,11 @@
-# CRM Fenix — Demo
+# CRM Fenix — Lab (experimentos)
 
-Demo **estática e interactiva** del CRM Fenix, pensada para verse en GitHub Pages
-sin necesidad de backend ni base de datos.
+Repo **privado de pruebas** para iterar cambios visuales del frontend del CRM Fenix
+antes de llevarlos al proyecto real. Demo estática e interactiva (sin backend).
 
-### 🔗 Demo en vivo: **https://zsh4k.github.io/crm-demo/**
+### 🔗 Preview en vivo: **https://zsh4k.github.io/crm-lab/**
+
+**Cambios en curso:** botones con **color sólido** (sin degradados).
 
 > **Datos de ejemplo.** Todo lo que ves (clientes, empresas, pipeline, productos,
 > pedidos, agenda, tareas) es ficticio y vive **en tu navegador** (localStorage).
